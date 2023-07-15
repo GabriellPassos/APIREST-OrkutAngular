@@ -1,0 +1,31 @@
+const express = require("express");
+const router = express.Router();
+const UsuarioController = require("./Controllers/UsuarioController");
+const multer = require("multer");
+const storage = require("./Services/MulterConfig");
+const upload = multer({ storage: storage });
+const {verificarToken} = require("./Services/TokenService");
+const ImagemController = require("./Controllers/ImagemController");
+const RecadoController = require("./Controllers/RecadoController");
+router.use(express.json());
+router.post("/registro", upload.any(), UsuarioController.registro);
+router.post("/login", upload.any(), UsuarioController.login);
+//router.patch("/update",upload.any(),(req, res, next) => verificarToken(req, res, next),UsuarioController.atualizar);
+router.get("/perfil/:nomeUsuario",(req, res, next) => verificarToken(req, res, next), UsuarioController.buscarPerfil);
+router.get("/perfil",(req, res, next) => verificarToken(req, res, next), UsuarioController.buscarPerfil);
+router.patch("/perfil",(req, res, next) => verificarToken(req, res, next), upload.any(), UsuarioController.atualizar);
+router.get("/foto/:nomeFoto", ImagemController.buscarFoto);
+router.delete("/foto/:fotoId",(req, res, next) => verificarToken(req, res, next),ImagemController.excluirFoto);
+router.post("/album/novo",(req, res, next) => verificarToken(req, res, next), upload.any(), ImagemController.novoAlbum);
+router.get("/album",(req, res, next) => verificarToken(req, res, next), ImagemController.buscarAlbum);
+router.get("/album/:nomeUsuario",(req, res, next) => verificarToken(req, res, next), ImagemController.buscarAlbum);
+router.patch("/album/:albumId",(req, res, next) => verificarToken(req, res, next),upload.any(), ImagemController.atualizarAlbum)
+router.get("/album/:nomeUsuario/:albumId",(req, res, next) => verificarToken(req, res, next), ImagemController.buscarAlbumPorId);
+router.delete("/album/:albumId",(req, res, next) => verificarToken(req, res, next),ImagemController.excluirAlbum);
+router.post("/recados/:nomeUsuario",(req, res, next) => verificarToken(req, res, next), upload.any(), RecadoController.novo);
+router.get("/recados/:nomeUsuario",(req, res, next) => verificarToken(req, res, next), RecadoController.buscar);
+router.get("/recados",(req, res, next) => verificarToken(req, res, next), RecadoController.buscar);
+router.delete("/recados/:recadoId",(req, res, next) => verificarToken(req, res, next), RecadoController.excluir);
+router.get("/perfilInfo",(req, res, next) => verificarToken(req, res, next), UsuarioController.buscarPerfilInfo);
+router.get("/verificarToken",(req, res, next) => verificarToken(req, res, next), UsuarioController.verificarToken)
+module.exports = router;
