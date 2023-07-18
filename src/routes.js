@@ -10,13 +10,12 @@ const RecadoController = require("./Controllers/RecadoController");
 router.use(express.json());
 router.post("/registro", upload.any(), UsuarioController.registro);
 router.post("/login", upload.any(), UsuarioController.login);
-//router.patch("/update",upload.any(),(req, res, next) => verificarToken(req, res, next),UsuarioController.atualizar);
 router.get("/perfil/:nomeUsuario",(req, res, next) => verificarToken(req, res, next), UsuarioController.buscarPerfil);
 router.get("/perfil",(req, res, next) => verificarToken(req, res, next), UsuarioController.buscarPerfil);
 router.patch("/perfil",(req, res, next) => verificarToken(req, res, next), upload.any(), UsuarioController.atualizar);
 router.get("/foto/:nomeFoto", ImagemController.buscarFoto);
 router.delete("/foto/:fotoId",(req, res, next) => verificarToken(req, res, next),ImagemController.excluirFoto);
-router.post("/album/novo",(req, res, next) => verificarToken(req, res, next), upload.any(), ImagemController.novoAlbum);
+router.post("/album",(req, res, next) => verificarToken(req, res, next), upload.any(), ImagemController.novoAlbum);
 router.get("/album",(req, res, next) => verificarToken(req, res, next), ImagemController.buscarAlbum);
 router.get("/album/:nomeUsuario",(req, res, next) => verificarToken(req, res, next), ImagemController.buscarAlbum);
 router.patch("/album/:albumId",(req, res, next) => verificarToken(req, res, next),upload.any(), ImagemController.atualizarAlbum)
