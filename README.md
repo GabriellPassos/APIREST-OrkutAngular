@@ -3,13 +3,7 @@
   Esta API é parte da aplicação [Orkut Angular](https://github.com/GabriellPassos/OrkutAngular), um clone da saudosa rede social. 
   Atuando no back-end, é responsável por tratar todas as requisições feitas pelos usuários. Foi construída sob o framework Express com NodeJS.
 
-## Tecnologias utilizadas
-- NodeJS
-- JWT
-- Express
-- Sequelize
-- MySQL
-
+## :mag_right: Visão geral
 ## Rotas
 ### Registro
   Registro de usuário.
@@ -137,6 +131,13 @@
 
 ## Diagrama do banco de dados
 ![Diagrama do banco de dados](https://github.com/GabriellPassos/assets/blob/main/orkutangular/diagramaBancoDeDados.png)
+
+## Tecnologias utilizadas
+- NodeJS
+- JWT
+- Express
+- Sequelize
+- MySQL
 
 # Como executar o projeto
 Pré-requisitos: npm
